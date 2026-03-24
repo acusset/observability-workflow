@@ -1,0 +1,32 @@
+{
+  "name": "observability-workflow",
+  "version": "1.0.0",
+  "description": "Starter repository for the observability workflow project.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "slidev",
+    "build": "slidev build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acusset/observability-workflow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/acusset/observability-workflow/issues"
+  },
+  "homepage": "https://github.com/acusset/observability-workflow#readme",
+  "devDependencies": {
+    "@slidev/cli": "^52.9.1"
+  },
+  "overrides": {
+    "monaco-editor": "0.55.1",
+    "dompurify": "3.3.3"
+  },
+  "dependencies": {
+    "@slidev/theme-default": "^0.25.0"
+  }
+}
