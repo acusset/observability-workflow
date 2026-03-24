@@ -27,6 +27,13 @@ Slidev presentation for the observability workflow project.
 - `slides.md` – Slidev presentation source
 - `package.json` – Slidev scripts and dependencies
 
+## Deployment
+
+The presentation is deployed to GitHub Pages by GitHub Actions on every push to `main`.
+
+- Published URL: `https://acusset.github.io/observability-workflow/`
+- The workflow builds the deck with the repository base path before uploading `dist`
+
 ## Development
 
 - Keep local secrets in environment files that are not committed.
