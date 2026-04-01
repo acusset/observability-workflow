@@ -1,40 +1,48 @@
-# observability-workflow
 
-Slidev presentation for the observability workflow project.
+# Observability Workflow Presentation
 
-## Getting started
+This project contains a Slidev presentation that explores how AI agents can automate and streamline security and observability workflows for engineering teams. The deck covers:
 
-1. Install dependencies:
+- The hidden cost of context switching and reactive work
+- How AI can triage vulnerabilities, investigate bugs, and generate structured reports
+- Real-world examples of automating CVE management and incident analysis
+- Lessons learned and practical implementation tips
 
+## Running the Presentation Locally
+
+To view or edit the presentation on your machine:
+
+1. **Install dependencies:**
    ```bash
    npm install
    ```
 
-2. Start the Slidev dev server:
-
+2. **Start the Slidev development server:**
    ```bash
    npm run dev
    ```
+   This will open the presentation in your browser with hot-reloading for live edits.
 
-3. Build the presentation:
-
+3. **Build the presentation for production:**
    ```bash
    npm run build
    ```
+   The static site will be output to the `dist` folder.
 
-## Project structure
+## Project Structure
 
-- `slides.md` – Slidev presentation source
-- `package.json` – Slidev scripts and dependencies
+- `slides.md` – Main Slidev presentation source (edit this file to update slides)
+- `package.json` – Project scripts and dependencies
+- `assets/` – Images and media used in the slides
 
 ## Deployment
 
-The presentation is deployed to GitHub Pages by GitHub Actions on every push to `main`.
+The presentation is automatically deployed to GitHub Pages via GitHub Actions on every push to `main`.
 
-- Published URL: `https://acusset.github.io/observability-workflow/`
-- The workflow builds the deck with the repository base path before uploading `dist`
+- **Live URL:** [https://acusset.github.io/observability-workflow/](https://acusset.github.io/observability-workflow/)
+- The workflow builds the deck with the correct base path and uploads the `dist` folder
 
-## Development
+## Development Notes
 
 - Keep local secrets in environment files that are not committed.
 - Commit only source, configuration templates, and documentation.

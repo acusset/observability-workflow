@@ -1,371 +1,276 @@
 ---
 theme: default
-background: '#0f0f1a'
+background: "#0f0f1a"
 class: text-center
 highlighter: shiki
 lineNumbers: false
 drawings:
   persist: false
 transition: slide-left
-title: AI as an Engineering Teammate
+title: Security and Observability
+layout: cover
 ---
 
-# AI as an Engineering Teammate
+# Security & Observability
 
-**Two real workflows already running in production**
+ _Automating as much as possible_
 
 ---
-layout: default
-background: '#0f0f1a'
+layout: fact
 ---
 
-# Engineering is increasingly reactive
+# I hate context switching
 
 <br/>
 
-> Every sprint, unplanned work creeps in.  
-> Vulnerabilities get flagged, bugs get reported, logs need reading.  
-> This work is important — but invisible. It doesn't ship features.
+<div style="display: flex; justify-content: center; gap: 2rem; align-items: flex-start;">
+  <img v-click src="/assets/teams1.jpeg" alt="Teams conversation example 1" style="max-width: 40%; border-radius: 8px; box-shadow: 0 2px 8px #0003;" />
+  <img v-click src="/assets/teams2.jpeg" alt="Teams conversation example 2" style="max-width: 40%; border-radius: 8px; box-shadow: 0 2px 8px #0003;" />
+</div>
 
 <br/>
 
-```
-Sprint capacity ████████████████████░░░░░░░░░░  Planned work
-                ████████████████░░░░░░░░░░░░░░  → Reactive work eating in
-```
+<span v-click style="font-size: 1.2rem; color: #e0e0e0;">Interruptions kill your productivity</span>
+
+---
+layout: cover
+---
+
+# Security
 
 ---
 layout: three-cols
 ---
 
-# The Cost Nobody Talks About
+# Open Source Security
 
 ::left::
 
-### 🔁 Context switches
-Engineers average **2+ unplanned interruptions** per day from security alerts and bug reports
+### 🔁 Dependabot
+
+Dependabot opens PRs that only bump dependencies, without checking for breaking changes
 
 ::center::
 
-### 🐛 Vague bug reports
-A report with no reproduction steps takes **3× longer** to investigate than a detailed one
+### 🐕 Third Party Tools
+
+Tools like Snyk provide more details about packages and dependencies, and perform regular checks
 
 ::right::
 
 ### 🔐 CVEs sit unactioned
-Vulnerability alerts often go unresolved for **days** — not from negligence, but from unclear ownership
+
+Vulnerability alerts often go unresolved for **days** unless they are blocking or time is allocated for the team to fix them
+
+
+---
+layout: default
+---
+
+# How to deal with vulnerable packages
+
+<ul style="margin-top: 2rem; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; color: #e0e0e0; font-size: 1.1rem;">
+  <li v-click>Identify the vulnerable package and affected version(s)</li>
+  <li v-click>Review the changelog and release notes for the latest version</li>
+  <li v-click>Assess breaking changes and update code as needed</li>
+  <li v-click>Update the package to the latest secure version (including major upgrade if required)</li>
+  <li v-click>Run tests to verify nothing is broken</li>
+  <li v-click>Update the documentation to reflect the changes</li>
+</ul>
+
+<span v-click>Rinse and repeat for each package 🔁</span>
 
 ---
 layout: center
-background: '#0f0f1a'
 ---
 
 <div style="text-align: center; max-width: 700px; margin: auto;">
 
-# What if AI could own this reactive layer?
+# What if AI could help?
 
 <br/>
-
-| 🏗️ Engineer's focus | 🤖 AI's focus |
-|---|---|
-| Architecture & design | Security triage |
-| Shipping features | Bug investigation |
-| Customer decisions | Log analysis |
-| Code review | Vulnerability reports |
-
+If it's a repetitive task, it can be automated using a prompt.
 </div>
 
 ---
-layout: center
+layout: quote
 background: '#1a1a0f'
 ---
 
-<div style="font-size: 6rem; opacity: 0.15; font-weight: 900;">01</div>
+🔐 Third-party tools check for CVEs and hand over to the agent to make the change
 
-# Case 1: Vulnerability Management
-
-<div style="opacity: 0.6; margin-top: 1rem;">🔐 When a package has a CVE — the agent takes it from there</div>
+<span v-click style="display: block; margin-top: 2rem; font-weight: bold; color: #ffd700;">How do you give enough context on what to fix? How do you trust the fix?</span>
 
 ---
+layout: three-cols
+--- 
 
-# A CVE alert lands. Now what?
-
-The manual process every engineer dreads:
-
-```
-CVE alert received
-      ↓  ⏱
-Identify affected packages
-      ↓  ⏱
-Assess severity across dependency tree
-      ↓  ⏱
-Plan upgrade path (without breaking changes)
-      ↓  ⏱
-Test & verify
-      ↓  ⏱
-Write up findings
-```
-
-> Each step requires context, research, and focus.  
-> And it usually falls on whoever is unlucky enough to pick it up.
-
----
-layout: two-cols
----
-
-# The agent takes it from here
+# Creating a workflow
 
 ::left::
 
-**What the agent does:**
+**What is OSS doing:**
 
-1. Calls the **Snyk REST API** to retrieve vulnerability data
-2. Scores findings by **CVSS severity**
-3. Maps affected packages across the dependency tree
-4. Proposes a **safe upgrade path**
-5. Flags potential breaking changes
+1. Daily checks of the codebases and packages
+2. Create recommendations and vulnerability reports
 
-The engineer **reviews and approves** — they don't investigate from scratch.
+::center::
+
+**What is the agent doing:**
+
+1. Reads the OSS report
+2. Retrieves patch notes, migration guides etc and document choices
+3. Flags and handles potential breaking changes
+4. Delivers a plan for a **safe upgrade path**
 
 ::right::
 
-**Sample output:**
+**The human check:**
 
-```json
-{
-  "scan_date": "2026-03-27",
-  "critical": [
-    {
-      "package": "lodash",
-      "current": "4.17.15",
-      "cve": "CVE-2021-23337",
-      "severity": "CRITICAL",
-      "fix": "4.17.21",
-      "breaking_changes": false
-    }
-  ],
-  "high": [...],
-  "recommended_action": "Safe to upgrade all critical items"
-}
-```
+1. Checks the implementation plan
+2. Review the upgrades and changes
 
 ---
 layout: center
 ---
 
-# From hours to minutes. Consistently.
+# Implementation
 
-<br/>
+Multiple ways to implement this workflows, depending on tools availables: 
 
-| | Before | After |
-|---|---|---|
-| ⏱ Triage time | ~3 hours | ~15 minutes |
-| 📋 Output quality | Varies by engineer | Standardized |
-| 🔁 Context switching | High | Near zero |
-
-<br/>
-
-> *"The agent doesn't get tired. It doesn't skip steps.  
-> It doesn't deprioritize a CVE because the sprint is busy."*
+- Use MCP (if available)
+- Use a skill that connects the agent to your thrid party tool (REST / CLI)
+- Have the 3rd party tool open issues on GitHub, assigned to Copilot
 
 ---
-layout: center
-background: '#0f1a1a'
+layout: two-cols-header
 ---
 
-<div style="font-size: 6rem; opacity: 0.15; font-weight: 900;">02</div>
+# How it was implemented
 
-# Case 2: Observability & Bug Investigation
+::left::
 
-<div style="opacity: 0.6; margin-top: 1rem;">🔭 When a user says "something's not working" — AI finds out what</div>
+❌ MCP not available
 
----
+❌ Background or Cloud agents
 
-# A user says: "something's not working"
+::right::
 
-The worst kind of bug report:
+✅ Custom skill using Snyk CLI
 
-```
-┌─────────────────────────────────────────┐
-│  🐛 Bug Report                          │
-│─────────────────────────────────────────│
-│  Title: Something's not working         │
-│  Steps to reproduce: (empty)            │
-│  Expected behaviour: (empty)            │
-│  Actual behaviour: it just doesn't work │
-│  Attachments: none                      │
-└─────────────────────────────────────────┘
-```
+✅ Custom upgrade prompt per package manager
 
-Then the manual investigation begins:
+✅ Custom orchestration prompt
 
-```
-Open Datadog  →  ⏱  Find the right timeframe  →  ⏱  
-Correlate logs with traces  →  ⏱  Form a hypothesis  →  ⏱  
-Write it all up  →  ⏱  (2–3 hours later...)
-```
+✅ Running locally on multiple chats
 
 ---
 layout: three-cols
 ---
 
-# Give the AI the logs. Get back a bug report.
+# Key takeaways
+Learnings
+
+Focus on what you can do with the tools that you have access to
+
+AI is not just for coding, but also for other "development" activities
+
+Advocate and drive adoption
+
+---
+layout: default
+---
+
+# Going further
+
+How to refine and improve the workflow?
+
+Handle different stacks (pip, Maven, Gradle)
+
+Handle package overrides
+
+Shift to GitHub Issues assigned to Copilot
+
+
+---
+layout: cover
+---
+
+# Observability
+
+Dealing with bugs
+
+_...or at least showing it's not your fault and passing it to another team_
+
+---
+layout: default
+---
+
+# Problems
+
+Production bugs have to be investigated fast
+
+The users will give close to no information
+
+---
+layout: default
+---
+
+# 🔍 Investigation
+
+1. Ask user for more details:
+   - Timeframe
+   - What was the user trying to do
+2. Check the logs for anomalies
+3. Check error logs
+4. Check traces
+
+<div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+  <img src="/assets/datadog-logs.png" alt="Datadog trace example" style="max-width: 70%; border-radius: 8px; box-shadow: 0 2px 8px #0003;" />
+  <img src="/assets/datadog-trace.png" alt="Datadog trace example" style="max-width: 70%; border-radius: 8px; box-shadow: 0 2px 8px #0003;" />
+</div>
+
+
+---
+layout: center
+---
+
+<div style="text-align: center; max-width: 700px; margin: auto;">
+
+# What if AI could help?
+
+<br/>
+If it's a repetitive task, at least for the initial analysis, it can be automated
+</div>
+
+---
+layout: three-cols
+--- 
+
+# Creating a workflow
 
 ::left::
 
-**Input: Datadog context**
+**What is the 3rd party tool:**
 
-```
-[10:42:03] ERROR POST /api/orders
-  TraceID: 7f3a92b1
-  Service: order-service
-  Duration: 8423ms
-  
-[10:42:03] WARN DB pool exhausted
-  connections: 20/20
-  queue_depth: 47
-  
-[10:42:04] ERROR Timeout
-  downstream: payment-service
-  waited: 5000ms
-```
+1. Collecting logs
+2. Tracking errors
+3. Displaying traces
 
 ::center::
 
-<div style="text-align:center; padding-top: 4rem;">
+**What is the agent doing:**
 
-↓
-
-**AI analyses traces + logs**
-
-↓
-
-</div>
+1. Reading the logs
+2. Matching the logs with the codebase
+3. Identifying the scenario
+4. Delivers a possible list of scenarios
+5. (optional) Plan to fix
 
 ::right::
 
-**Output: Structured bug report**
+**The human check:**
 
-```markdown
-## Bug: Order API Timeout
-
-**When:** 2026-03-27 10:42 UTC  
-**Service:** order-service  
-**Severity:** High  
-
-**Root cause:** DB connection pool 
-exhaustion caused cascading timeout 
-to payment-service.
-
-**Impact:** All orders during 
-10:41–10:44 UTC (~3 min window)
-
-**Recommended fix:** Increase pool 
-size or add circuit breaker on 
-payment-service calls.
-```
-
----
-layout: center
----
-
-# Richer reports. Faster than any human could write.
-
-<br/>
-
-| | Typical manual report | AI-generated report |
-|---|---|---|
-| Time to produce | 2–3 hours | ~5 minutes |
-| Root cause identified | Sometimes | Consistently |
-| Affected time window | Rarely specified | Always included |
-| Recommended fix | Rarely included | Always included |
-| Junior engineer output | Sparse | Senior-level detail |
-
-<br/>
-
-> *"Junior engineers can now produce senior-level investigation output  
-> on their very first on-call shift."*
-
----
-layout: two-cols
----
-
-# AI removes the worst parts of the job
-
-::left::
-
-### 🤖 AI handles
-- Repetitive investigation
-- Blank-page problem
-- Cross-referencing data sources
-- Structured report writing
-- CVE triage and scoring
-- Context-switching tax
-
-::right::
-
-### 👷 You handle
-- Architectural decisions
-- Reviewing & approving AI output
-- Customer empathy
-- Engineering judgment
-- Tradeoffs and priorities
-- What to build next
-
-<br/>
-
-> *AI doesn't replace the engineer.  
-> It removes the parts engineers  
-> shouldn't need to do manually.*
-
----
-layout: center
-background: '#0f0f1a'
----
-
-# What else could AI own?
-
-<br/>
-
-<div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; max-width: 600px; margin: auto;">
-
-```
-┌────────────────────┐  ┌────────────────────┐
-│ 📝 Incident        │  │ 🔍 PR summaries     │
-│    postmortems     │  │    & review prep   │
-└────────────────────┘  └────────────────────┘
-
-┌────────────────────┐  ┌────────────────────┐
-│ 📦 Release notes   │  │ 🚨 On-call triage   │
-│    generation      │  │    & escalation    │
-└────────────────────┘  └────────────────────┘
-
-┌────────────────────┐  ┌────────────────────┐
-│ 🧪 Test coverage   │  │ 📊 Dependency      │
-│    gap analysis    │  │    health reports  │
-└────────────────────┘  └────────────────────┘
-```
-
-</div>
-
-> *The pattern is always the same: give AI the context,  
-> get structured output, engineer validates.*
-
----
-layout: center
-background: '#0f0f1a'
----
-
-# AI can handle real engineering work.
-
-## We've proved it.
-
-<br/>
-
-These aren't prototypes or demos.  
-They're **running in production today.**
-
-<br/>
-
-> *The question isn't whether AI is ready.  
-> It's what we point it at next.*
+1. Review scenarios
+2. Suggest fix
+3. Handover ("it's not my service")
